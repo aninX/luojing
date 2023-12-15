@@ -1,0 +1,14 @@
+{
+  "name": "luojing",
+  "version": "1.0.0",
+  "description": "luojing",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "luojing"
+  ],
+  "author": "anin",
+  "license": "ISC"
+}
