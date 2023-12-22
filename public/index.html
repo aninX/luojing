@@ -8,6 +8,7 @@
     <style>
         #container {
             position: relative;
+            margin:100px auto;
             width: 500px;
             height: 500px;
             display: flex;
@@ -16,7 +17,7 @@
         }
 
         .layer {
-            background: #fff;
+            background: rgb(193,171,111);
             position: absolute;
             transform: rotateZ(90deg);
             display: flex;
@@ -26,11 +27,12 @@
             height: 300px;
             border: 1px solid #333;
             border-radius: 50%;
+            overflow: hidden;
             
         }
 
         .position {
-            width: 100%;
+            width: 98%;
             /* background: #fff; */
             position: absolute;
             display: flex;
@@ -53,41 +55,114 @@
             background: #333;
         }
     </style>
+    <style>
+        #draw {
+            position: relative;
+            margin:100px auto;
+            width: 500px;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .quan {
+            overflow: hidden;
+            background: rgb(193,171,111);
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 300px;
+            height: 300px;
+            border: 0.5px solid #333;
+            border-radius: 50%;
+            
+        }
+
+        .shan {
+            border: 1px solid #333;
+            position: absolute;
+            transform-origin: left bottom;
+            left: 50%;
+            top: -50%
+        }
+    </style>
     <script src="../src/index.js" type="module"></script>
 </head>
 <body>
     <div id="container"></div>
+    <div id="draw"></div>
+</div>
+
     <script type="module">
-        import luojing from '../src/index.js'
+        import luojing,{draw} from '../src/index.js'
         const options = {};
         const data= [
             {
-                width: 150,
-                positions: ['东','南','西','北'],
+                width: 40,
+                positions: ['南','西','北','东'],
+                rotate: false,
+                color: '',
+                bgColor: ['red']
+            },
+             {
+                width: 50,
+                positions: [ '☲','☷','☱','☰', '☵','☶', '☳','☴']
+            },
+            {
+                width: 50,
+                positions: [ '离','坤','兑','乾', '坎','艮', '震','巽']
+            },
+            {
+                width: 60,
+                positions: ['南','南西',' 西','西北','北','北东',' 东',' 东南'],
+                rotate: false,
+                color: '',
+                bgColor: ['blue']
+            },
+            {
+                width: 50,
+                positions: ['火','土', '金','金', '水','土','木','木']
+            },
+            {
+                width: 50,
+                positions: ['午','丁','未','坤','申','庚','酉','辛','戌','乾','亥','壬','子','癸','丑','艮','寅','甲','卯','乙','辰','巽','巳','丙'],
                 rotate: false,
                 color: ''
             },
-            {
-                width: 200,
-                positions: ['乾','兑','离','震','巽','坎','兑','坤'],
-                rotate: false,
+             {
+                width: 80,
+                positions: ['夏至','小暑','大暑','立秋','处暑','白露','秋分','寒露','霜降','立冬','小雪','大雪','冬至','小寒','大寒','立春','雨水','惊蛰','春分','清明','谷雨','立夏','小满','芒种'],
+                rotate: 7.5,
                 color: ''
             },
             {
-                width: 250,
+                width: 50,
                 positions: ['甲','乙','丙','丁','戊','己','庚','辛','壬','癸'],
                 rotate: false,
                 color: ''
             },
             {
-                width: 300,
+                width: 50,
                 positions: ['子','丑','寅','卯','辰','巳','午','未','申','酉','戌','亥'],
                 rotate: false,
                 color: ''
             },
         ];
-           
-        luojing(document.getElementById('container'),options, data)
+        const drawData = [
+                {
+                    width: 50,
+                    positions: ['南','西','北','东'],
+                },
+                {
+                width: 50,
+                positions: [ '☲','☷','☱','☰', '☵','☶', '☳','☴']
+            },
+        ]
+        luojing(document.getElementById('container'),options, data);
+        draw(document.getElementById('draw'),{},drawData)
     </script>
 </body>
 </html>
