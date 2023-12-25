@@ -8,9 +8,8 @@ function setStyle (tag,style) {
 }
 function luojing(container, option, data) {
     let width = 50 + data.reduce((sum,i)=> sum += i.width, 0);
-   
     data.reverse().forEach((layer,index) => {
-        width -= layer.width;
+        
         const layerNode = document.createElement('div');
         layerNode.className = 'layer';
         const lstyle = {
@@ -25,9 +24,6 @@ function luojing(container, option, data) {
             shan.className ='shan';
             setStyle(shan, {
                 width:  `${width}px`,
-
-
-
                 height:  `${width}px`,
                 background:i === 0 ? layer?.bgColor?.[0] || 'none': 'none',
                 transform: `skew(${360 /layer.positions.length - 90}deg,0deg)`,
@@ -81,7 +77,7 @@ function luojing(container, option, data) {
         // }
         // container.appendChild(yuan)
       
-
+        width -= layer.width;
     });
 
     const time = document.createElement('div');
@@ -89,11 +85,10 @@ function luojing(container, option, data) {
     setInterval(() => {
         // const rotate = 116.22 - 120; 
         const t = new Date();
-        const time = (t.getHours() *3600 + t.getMinutes() * 60 + t.getSeconds()) / 240
-        setStyle(time,{
-            rotate: `${time}deg`
-        });
-    }, 1000);
+        const tim = (t.getHours() *3600 + t.getMinutes() * 60 + t.getSeconds()) / 240
+        console.log('%c [ time ]-90', 'font-size:13px;  ackground:pink; color:#bf2c9f;', tim)
+        time.style.rotate = `${tim}deg`
+    }, 5000);
     container.appendChild(time);
     
 }
