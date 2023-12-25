@@ -7,24 +7,27 @@ function setStyle (tag,style) {
 
 }
 function luojing(container, option, data) {
-    let width = 50
-    data.forEach((layer,index) => {
-        width += layer.width;
+    let width = 50 + data.reduce((sum,i)=> sum += i.width, 0);
+   
+    data.reverse().forEach((layer,index) => {
+        width -= layer.width;
         const layerNode = document.createElement('div');
         layerNode.className = 'layer';
         const lstyle = {
             width: `${width}px`,
             height: `${width}px`,
             rotate:  `${layer.rotate ?? 0}deg`,
-            zIndex: 99 -index,
+            // zIndex: 99 -index,
         }
         setStyle(layerNode,lstyle);
         for(let i = 0; i < layer.positions.length / 2;i++) {
             const shan = document.createElement('div');
             shan.className ='shan';
             setStyle(shan, {
-                width:  `${width}px`,\
-                
+                width:  `${width}px`,
+
+
+
                 height:  `${width}px`,
                 background:i === 0 ? layer?.bgColor?.[0] || 'none': 'none',
                 transform: `skew(${360 /layer.positions.length - 90}deg,0deg)`,
@@ -40,6 +43,9 @@ function luojing(container, option, data) {
                 layerNode.appendChild(div)
             })
         } else {
+            const text = document.createElement('div');
+            text.className = 'text';
+            setStyle(text,lstyle);
             for (let i = 0; i < layer.positions.length / 2; i++) {
                 const div = document.createElement('div');
                 div.className = `position position-${index}-${i}`;
@@ -57,8 +63,9 @@ function luojing(container, option, data) {
                 // right.style.transform = `rotateZ(90deg)`;
                 div.appendChild(left);
                 div.appendChild(right);
-                layerNode.appendChild(div)
+                text.appendChild(div)
             }
+            container.appendChild(text);
         }
        
 
@@ -76,6 +83,18 @@ function luojing(container, option, data) {
       
 
     });
+
+    const time = document.createElement('div');
+    time.className = 'time';
+    setInterval(() => {
+        // const rotate = 116.22 - 120; 
+        const t = new Date();
+        const time = (t.getHours() *3600 + t.getMinutes() * 60 + t.getSeconds()) / 240
+        setStyle(time,{
+            rotate: `${time}deg`
+        });
+    }, 1000);
+    container.appendChild(time);
     
 }
 
